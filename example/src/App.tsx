@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Quiz } from 'react-quiz-game'
-import 'react-quiz-game/dist/index.css'
+import 'react-quiz-game/index.css'
 
 const App = () => {
 

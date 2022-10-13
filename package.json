@@ -1,6 +1,6 @@
 {
   "name": "react-quiz-game",
-  "version": "1.0.1 beta",
+  "version": "1.0.1",
   "description": "Made with create-react-library",
   "author": "Yaundee",
   "license": "MIT",
@@ -62,7 +62,6 @@
     "dist"
   ],
   "dependencies": {
-    "@types/eslint-visitor-keys": "^1.0.0",
     "uniqid": "^5.4.0"
   }
 }
