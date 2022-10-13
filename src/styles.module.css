@@ -1,9 +1,18 @@
 /* add css module styles here (optional) */
 
-.test {
+.app {
   margin: 2em;
   padding: 0.5em;
   border: 2px solid #000;
   font-size: 2em;
-  text-align: center;
+  /* text-align: center; */
+}
+
+.answer {
+  margin-left: 1em;
+  font-size: 0.7em;
+}
+
+.question {
+  margin-bottom: 1em;
 }
