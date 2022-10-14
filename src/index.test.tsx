@@ -32,5 +32,5 @@ describe('Answer preparator test', () => {
       expect(result.score).toEqual(answers.result.score);
     })
   }
-  prepareAnswers(answers.data.answers, answers.data.preparedQuestions, resultCallback);
+  prepareAnswers(answers.data.answers, answers.data.preparedQuestions, resultCallback, () => { }, () => { });
 })

@@ -1,2 +1,2 @@
 export * from './dataTypes';
-export * from './propsTypes'; 
+export * from './propsTypes';

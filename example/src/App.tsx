@@ -5,8 +5,8 @@ import 'react-quiz-game/index.css'
 
 const App = () => {
 
-  const getResult = (answers: any) => {
-    console.log(answers)
+  const getResult = (quizResult: any) => {
+    console.log(quizResult)
   }
 
   return <Quiz questions={[
@@ -36,7 +36,9 @@ const App = () => {
       correctAnswer: "10",
     }
   ]}
-    answersCallback={getResult} />
+    answersCallback={getResult}
+    resultsModal={true}
+  />
 }
 
 export default App

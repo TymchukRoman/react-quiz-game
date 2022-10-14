@@ -52,6 +52,6 @@ export interface Score {
 }
 
 export interface QuizResult {
-    answers: PreparedAnswer[] | Answer[];
+    answers: PreparedAnswer[];
     score: Score;
 } 

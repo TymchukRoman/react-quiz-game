@@ -6,12 +6,3 @@
   overflow-y: scroll;
   height: 400px;
 }
-
-.answer {
-  margin-left: 1em;
-  font-size: 0.7em;
-}
-
-.question {
-  margin-bottom: 1em;
-}

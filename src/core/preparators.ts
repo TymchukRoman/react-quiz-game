@@ -36,7 +36,9 @@ export const prepareQuestions = (questions: Question[]): QuestionPrepared[] => {
 export const prepareAnswers = (
     answers: Answer[],
     preparedQuestions: QuestionPrepared[],
-    answersCallback: AnswersCallbackFunction
+    answersCallback: AnswersCallbackFunction,
+    setQuizResult: (quizResult: QuizResult) => void,
+    setShowResultModal: (value: boolean) => void
 ): void => {
     const preparedAnswers: PreparedAnswer[] = answers.map((a: Answer) => {
         const q: QuestionPrepared | undefined = preparedQuestions.find((q: QuestionPrepared) => q.id === a.id);
@@ -54,5 +56,8 @@ export const prepareAnswers = (
         answers: preparedAnswers,
         score: getScore(preparedAnswers, preparedQuestions)
     }
+
+    setQuizResult(QuizResult);
+    setShowResultModal(true);
     answersCallback(QuizResult);
 }
