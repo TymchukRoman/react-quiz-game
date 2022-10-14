@@ -1,4 +1,4 @@
-# react-quiz-game
+# react-quiz-game (DEVELOPING)
 
 > Made with create-react-library
 

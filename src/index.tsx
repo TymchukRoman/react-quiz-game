@@ -1,92 +1,12 @@
 import * as React from 'react'
+import { prepareAnswers, prepareQuestions } from './core/preparators';
 import styles from './styles.module.css';
-import uniqid from 'uniqid';
-
-type AnswersCallbackFunction = (preparedAnswers: PreparedAnswer[]) => void;
-
-interface Question {
-  text: string;
-  answers: string[];
-  correctAnswer: string;
-  id?: string;
-  cost?: number;
-  answer?: string;
-}
-
-interface QuestionPrepared {
-  text: string;
-  answers: {
-    id: string;
-    label: string;
-  }[];
-  correctAnswer: {
-    id: string;
-    label: string;
-  };
-  id: string;
-  cost?: number;
-  answer?: string;
-}
-
-interface QuizProps {
-  questions: Question[];
-  height?: string;
-  answersCallback: AnswersCallbackFunction;
-}
-
-interface QuestionProps {
-  question: QuestionPrepared;
-  answer: any;
-  index: number;
-}
-
-interface Answer {
-  id: string;
-  answer: string;
-}
-
-interface PreparedAnswer {
-  text?: string;
-  correctAnswer?: {
-    id: string;
-    label: string;
-  };
-  id?: string;
-  cost?: number;
-  answer: Answer,
-}
-
-const prepareQuestions = (questions: Question[]): QuestionPrepared[] => {
-  return questions.map((q: Question) => {
-    const correctAnswerId = uniqid();
-    return {
-      ...q,
-      id: uniqid(),
-      answers: q.answers.map((a) => ({
-        id: a === q.correctAnswer ? correctAnswerId : uniqid(),
-        label: a
-      })),
-      correctAnswer: {
-        id: correctAnswerId,
-        label: q.correctAnswer
-      }
-    }
-  })
-}
-
-const prepareAnswers = (answers: Answer[], preparedQuestions: QuestionPrepared[], answersCallback: AnswersCallbackFunction) => {
-  const preparedAnswers: PreparedAnswer[] = answers.map((a: Answer) => {
-    const q: QuestionPrepared | undefined = preparedQuestions.find((q: QuestionPrepared) => q.id === a.id);
-    return {
-      text: q?.text,
-      correctAnswer: q?.correctAnswer,
-      id: q?.id,
-      cost: q?.cost,
-      answer: a,
-    }
-  })
-  answersCallback(preparedAnswers);
-}
+import {
+  QuestionPrepared,
+  Answer,
+  QuizProps,
+  QuestionProps,
+} from "./types";
 
 export const Quiz = ({ questions, height, answersCallback }: QuizProps) => {
 
@@ -120,7 +40,6 @@ const QuestionComponent = ({
   answer,
   index
 }: QuestionProps) => {
-
   const [choosenAnswer, setChoosenAnswer] = React.useState<string | null>(null);
 
   return <div className={styles.question}>
