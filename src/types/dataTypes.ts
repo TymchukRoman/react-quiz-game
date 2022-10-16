@@ -7,7 +7,16 @@ export interface Question {
     correctAnswer: string;
     id?: string;
     cost?: number;
-    answer?: string;
+}
+
+export interface AsyncQuestion {
+    text: string;
+    answers: {
+        id: string;
+        label: string;
+    }[];
+    id: string;
+    cost?: number;
 }
 
 export interface QuestionPrepared {
@@ -16,18 +25,17 @@ export interface QuestionPrepared {
         id: string;
         label: string;
     }[];
-    correctAnswer: {
+    correctAnswer?: {
         id: string;
         label: string;
     };
     id: string;
     cost: number;
-    answer?: string;
 }
 
 export interface Answer {
-    id: string;
-    answer: string;
+    qid: string;
+    aid: string;
 }
 
 export interface PreparedAnswer {

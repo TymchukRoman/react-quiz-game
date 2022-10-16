@@ -5,7 +5,8 @@ import {
     AnswersCallbackFunction,
     Answer,
     PreparedAnswer,
-    QuizResult
+    QuizResult,
+    AsyncQuestion
 } from "../types";
 import { getScore } from './calculation';
 
@@ -41,20 +42,73 @@ export const prepareAnswers = (
     setShowResultModal: (value: boolean) => void
 ): void => {
     const preparedAnswers: PreparedAnswer[] = answers.map((a: Answer) => {
-        const q: QuestionPrepared | undefined = preparedQuestions.find((q: QuestionPrepared) => q.id === a.id);
+        const q: QuestionPrepared | undefined = preparedQuestions.find((q: QuestionPrepared) => q.id === a.qid);
         return {
             text: q?.text,
             correctAnswer: q?.correctAnswer,
             id: q?.id,
             cost: q?.cost,
             answer: a,
-            correct: q?.correctAnswer.id === a.answer
+            correct: q?.correctAnswer?.id === a.aid
         }
     })
 
     const QuizResult: QuizResult = {
         answers: preparedAnswers,
         score: getScore(preparedAnswers, preparedQuestions)
+    }
+
+    setQuizResult(QuizResult);
+    setShowResultModal(true);
+    answersCallback(QuizResult);
+}
+
+export const prepareAnswersAsync = async (
+    answers: Answer[],
+    preparedQuestions: AsyncQuestion[],
+    answersCallback: AnswersCallbackFunction,
+    setQuizResult: (quizResult: QuizResult) => void,
+    setShowResultModal: (value: boolean) => void,
+    checkQuestion: (qid: string, aid: string) => Promise<{
+        value: boolean;
+        correctValue?: {
+            id: string;
+            label: string;
+        };
+    }>
+) => {
+    const preparedAnswers: PreparedAnswer[] = await Promise.all(
+        answers.map(async (a: Answer) => {
+            return new Promise(async (resolve) => {
+                const q: AsyncQuestion | undefined = preparedQuestions.find((q: AsyncQuestion) => q.id === a.qid);
+
+                const isCorrect = q?.id ? await checkQuestion(q?.id, a.aid) : { value: false };
+
+                resolve({
+                    text: q?.text,
+                    correctAnswer: isCorrect.correctValue || undefined,
+                    id: q?.id,
+                    cost: q?.cost,
+                    answer: a,
+                    correct: isCorrect.value
+                })
+            })
+
+        })
+    )
+
+    const updatedQuestions: QuestionPrepared[] = preparedQuestions.map((q) => {
+        return {
+            text: q.text,
+            answers: q.answers,
+            id: q.id,
+            cost: q.cost || 0
+        }
+    })
+
+    const QuizResult: QuizResult = {
+        answers: preparedAnswers,
+        score: getScore(preparedAnswers, updatedQuestions)
     }
 
     setQuizResult(QuizResult);

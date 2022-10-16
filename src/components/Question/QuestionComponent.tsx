@@ -20,18 +20,18 @@ export const QuestionComponent = ({
                 style={{
                     color: highlightAnswers && answers?.correctAnswer?.id === a.id
                         ? "green"
-                        : answers?.answer.answer === a.id
+                        : answers?.answer.aid === a.id
                             ? "red"
                             : "black",
                     fontWeight: highlightAnswers && answers?.correctAnswer?.id === a.id
                         ? "normal"
-                        : answers?.answer.answer === a.id
+                        : answers?.answer.aid === a.id
                             ? "normal"
                             : "lighter"
                 }}>
                 <input
                     type="checkbox"
-                    defaultChecked={choosenAnswer === a.id || answers?.answer.answer === a.id}
+                    defaultChecked={choosenAnswer === a.id || answers?.answer.aid === a.id}
                     disabled={highlightAnswers || !!choosenAnswer}
                     onClick={() => {
                         setChoosenAnswer(a.id);
