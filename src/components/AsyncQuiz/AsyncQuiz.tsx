@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { QuestionComponent } from '../Question/QuestionComponent';
-import { ResultModal } from '../Result/ResultModal';
+import { AsyncResultModal } from '../Result/ResultModal';
 import { prepareAnswersAsync } from '../../core/preparators';
-import styles from './quiz.module.css';
+import styles from './asyncQuiz.module.css';
 import {
     Answer,
     QuizResult,
@@ -10,13 +10,15 @@ import {
     AsyncQuestion,
 } from "../../types";
 
-export const Quiz = ({
+export const AsyncQuiz = ({
     questions,
-    height,
+    customStyles = {},
     answersCallback,
     resultsModal,
     checkQuestion
 }: AsyncQuizProps) => {
+
+    const { height = "400px" } = customStyles;
 
     const [preparedQuestions, setPreparedQuestions] = React.useState<AsyncQuestion[]>([]);
     const [quizResult, setQuizResult] = React.useState<QuizResult | null>(null);
@@ -38,7 +40,7 @@ export const Quiz = ({
         className={styles.app}
         style={{ height: height || "30rem" }}
     >
-        {resultsModal && quizResult && <ResultModal
+        {resultsModal && quizResult && <AsyncResultModal
             quizResult={quizResult}
             preparedQuestions={preparedQuestions}
             showModal={showResultModal}

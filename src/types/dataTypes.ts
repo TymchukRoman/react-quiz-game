@@ -62,4 +62,12 @@ export interface Score {
 export interface QuizResult {
     answers: PreparedAnswer[];
     score: Score;
-} 
+}
+
+export interface customStyles {
+    height?: string;
+    backgroundColor?: string;
+    fontFamily?: string;
+    textColor?: string;
+    disableNumbers?: boolean;
+}

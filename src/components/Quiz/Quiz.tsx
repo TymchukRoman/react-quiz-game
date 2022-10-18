@@ -10,7 +10,14 @@ import {
     QuizResult,
 } from "../../types";
 
-export const Quiz = ({ questions, height, answersCallback, resultsModal }: QuizProps) => {
+export const Quiz = ({
+    questions,
+    customStyles = {},
+    answersCallback,
+    resultsModal
+}: QuizProps) => {
+
+    const { height = "400px" } = customStyles;
 
     const [preparedQuestions, setPreparedQuestions] = React.useState<QuestionPrepared[]>([]);
     const [quizResult, setQuizResult] = React.useState<QuizResult | null>(null);

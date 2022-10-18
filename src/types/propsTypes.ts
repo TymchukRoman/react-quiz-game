@@ -4,17 +4,21 @@ import {
     AnswersCallbackFunction,
     QuestionPrepared,
     QuizResult,
-    PreparedAnswer
+    PreparedAnswer,
+    customStyles
 } from './';
 
-export interface QuizProps {
-    questions: Question[];
-    answersCallback: AnswersCallbackFunction;
-    height?: string;
+interface MainQuizProps {
     resultsModal?: boolean;
+    answersCallback: AnswersCallbackFunction;
+    customStyles?: customStyles
 }
 
-export interface AsyncQuizProps {
+export interface QuizProps extends MainQuizProps {
+    questions: Question[];
+}
+
+export interface AsyncQuizProps extends MainQuizProps {
     questions: AsyncQuestion[];
     checkQuestion: (qid: string, aid: string) => Promise<{
         value: boolean;
@@ -23,9 +27,6 @@ export interface AsyncQuizProps {
             label: string;
         };
     }>;
-    answersCallback: AnswersCallbackFunction;
-    height?: string;
-    resultsModal?: boolean;
 }
 
 export interface QuestionProps {
@@ -38,7 +39,15 @@ export interface QuestionProps {
 
 export interface QuizResultProps {
     quizResult: QuizResult;
-    preparedQuestions: QuestionPrepared[] | AsyncQuestion[];
+    preparedQuestions: QuestionPrepared[];
+    handleClose?: () => void;
+    showModal?: boolean;
+}
+
+
+export interface AsyncQuizResultProps {
+    quizResult: QuizResult;
+    preparedQuestions: AsyncQuestion[];
     handleClose?: () => void;
     showModal?: boolean;
 }

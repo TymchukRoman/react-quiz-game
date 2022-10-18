@@ -18,12 +18,12 @@ export const QuestionComponent = ({
                 key={a.id}
                 className={styles.answer}
                 style={{
-                    color: highlightAnswers && answers?.correctAnswer?.id === a.id
+                    color: (highlightAnswers && answers?.correctAnswer?.id === a.id) || (answers?.correct && a.id === answers.answer.aid)
                         ? "green"
                         : answers?.answer.aid === a.id
                             ? "red"
                             : "black",
-                    fontWeight: highlightAnswers && answers?.correctAnswer?.id === a.id
+                    fontWeight: (highlightAnswers && answers?.correctAnswer?.id === a.id) || (answers?.correct && a.id === answers.answer.aid)
                         ? "normal"
                         : answers?.answer.aid === a.id
                             ? "normal"

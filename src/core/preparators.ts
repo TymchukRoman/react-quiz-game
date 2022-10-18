@@ -77,12 +77,12 @@ export const prepareAnswersAsync = async (
         };
     }>
 ) => {
-    const preparedAnswers: PreparedAnswer[] = await Promise.all(
+    const preparedAnswers = await Promise.all(
         answers.map(async (a: Answer) => {
             return new Promise(async (resolve) => {
                 const q: AsyncQuestion | undefined = preparedQuestions.find((q: AsyncQuestion) => q.id === a.qid);
 
-                const isCorrect = q?.id ? await checkQuestion(q?.id, a.aid) : { value: false };
+                const isCorrect = q?.id ? await checkQuestion(a.aid, q?.id) : { value: false };
 
                 resolve({
                     text: q?.text,
@@ -107,8 +107,8 @@ export const prepareAnswersAsync = async (
     })
 
     const QuizResult: QuizResult = {
-        answers: preparedAnswers,
-        score: getScore(preparedAnswers, updatedQuestions)
+        answers: preparedAnswers as PreparedAnswer[],
+        score: getScore(preparedAnswers as PreparedAnswer[], updatedQuestions)
     }
 
     setQuizResult(QuizResult);
