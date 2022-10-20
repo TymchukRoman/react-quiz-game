@@ -7,12 +7,13 @@ export const QuestionComponent = ({
     answerFunc,
     index,
     highlightAnswers,
-    answers
+    answers,
+    customization
 }: QuestionProps) => {
     const [choosenAnswer, setChoosenAnswer] = React.useState<string | null>(null);
 
     return <div className={styles.question}>
-        <span>{index + 1}. {question.text}</span>
+        <span>{customization.disableNumbers ? "" : `${index + 1}. `}{question.text}</span>
         {question.answers.map((a) => {
             return <div
                 key={a.id}

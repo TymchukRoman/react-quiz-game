@@ -35,6 +35,7 @@ export interface QuestionProps {
     index: number;
     highlightAnswers?: boolean;
     answers?: PreparedAnswer;
+    customization: customStyles;
 }
 
 export interface QuizResultProps {
@@ -42,6 +43,7 @@ export interface QuizResultProps {
     preparedQuestions: QuestionPrepared[];
     handleClose?: () => void;
     showModal?: boolean;
+    customization: customStyles;
 }
 
 
@@ -50,4 +52,5 @@ export interface AsyncQuizResultProps {
     preparedQuestions: AsyncQuestion[];
     handleClose?: () => void;
     showModal?: boolean;
+    customization: customStyles;
 }

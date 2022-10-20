@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { QuestionComponent } from '../Question/QuestionComponent';
 import { AsyncResultModal } from '../Result/ResultModal';
-import { prepareAnswersAsync } from '../../core/preparators';
+import { prepareAnswersAsync, prepareStyles } from '../../core/preparators';
 import styles from './asyncQuiz.module.css';
 import {
     Answer,
     QuizResult,
     AsyncQuizProps,
     AsyncQuestion,
+    customStyles,
 } from "../../types";
 
 export const AsyncQuiz = ({
@@ -18,7 +19,7 @@ export const AsyncQuiz = ({
     checkQuestion
 }: AsyncQuizProps) => {
 
-    const { height = "400px" } = customStyles;
+    const customization: customStyles = prepareStyles(customStyles);
 
     const [preparedQuestions, setPreparedQuestions] = React.useState<AsyncQuestion[]>([]);
     const [quizResult, setQuizResult] = React.useState<QuizResult | null>(null);
@@ -38,16 +39,29 @@ export const AsyncQuiz = ({
 
     return <div
         className={styles.app}
-        style={{ height: height || "30rem" }}
+        style={{
+            height: customization.height,
+            fontFamily: customization.fontFamily,
+            color: customization.textColor,
+            backgroundColor: customization.backgroundColor
+        }}
     >
         {resultsModal && quizResult && <AsyncResultModal
             quizResult={quizResult}
             preparedQuestions={preparedQuestions}
             showModal={showResultModal}
             handleClose={() => setShowResultModal(false)}
+            customization={customization}
         />}
+
         {preparedQuestions.map((question: AsyncQuestion, index: number) => {
-            return <QuestionComponent key={question.id} question={question} answerFunc={answerFunc} index={index} />
+            return <QuestionComponent
+                key={question.id}
+                question={question}
+                answerFunc={answerFunc}
+                index={index}
+                customization={customization}
+            />
         })}
         <button
             onClick={() => prepareAnswersAsync(

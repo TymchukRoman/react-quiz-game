@@ -4,7 +4,8 @@ import { QuestionComponent } from '../Question/QuestionComponent';
 
 export const AsyncQuizResultComponent = ({
     quizResult,
-    preparedQuestions
+    preparedQuestions,
+    customization
 }: AsyncQuizResultProps) => {
 
     return <div>
@@ -46,6 +47,7 @@ export const AsyncQuizResultComponent = ({
                     answers={quizResult?.answers.find((a: PreparedAnswer) => {
                         return a.id === q.id;
                     })}
+                    customization={customization}
                 />
             })}
         </div>

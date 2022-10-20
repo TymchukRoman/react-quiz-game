@@ -9,6 +9,7 @@ export const ResultModal = ({
     preparedQuestions,
     handleClose,
     showModal,
+    customization
 }: QuizResultProps) => {
     const showHideClassName = showModal
         ? `${styles.modal} ${styles['display-block']}`
@@ -18,7 +19,11 @@ export const ResultModal = ({
         <div className={showHideClassName}>
             <section className={styles['modal-main']}>
                 <div className={styles['modal-content']}>
-                    <QuizResultComponent quizResult={quizResult} preparedQuestions={preparedQuestions} />
+                    <QuizResultComponent
+                        quizResult={quizResult}
+                        preparedQuestions={preparedQuestions}
+                        customization={customization}
+                    />
                 </div>
                 <div className={styles['modal-footer']}>
                     <button type="button" onClick={handleClose}>
@@ -34,7 +39,8 @@ export const AsyncResultModal = ({
     quizResult,
     preparedQuestions,
     handleClose,
-    showModal
+    showModal,
+    customization
 }: AsyncQuizResultProps) => {
     const showHideClassName = showModal
         ? `${styles.modal} ${styles['display-block']}`
@@ -44,7 +50,11 @@ export const AsyncResultModal = ({
         <div className={showHideClassName}>
             <section className={styles['modal-main']}>
                 <div className={styles['modal-content']}>
-                    <AsyncQuizResultComponent quizResult={quizResult} preparedQuestions={preparedQuestions} />
+                    <AsyncQuizResultComponent
+                        quizResult={quizResult}
+                        preparedQuestions={preparedQuestions}
+                        customization={customization}
+                    />
                 </div>
                 <div className={styles['modal-footer']}>
                     <button type="button" onClick={handleClose}>

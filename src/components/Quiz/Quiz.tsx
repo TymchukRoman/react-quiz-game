@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { QuestionComponent } from '../Question/QuestionComponent';
 import { ResultModal } from '../Result/ResultModal';
-import { prepareAnswers, prepareQuestions } from '../../core/preparators';
+import { prepareAnswers, prepareQuestions, prepareStyles } from '../../core/preparators';
 import styles from './quiz.module.css';
 import {
     QuestionPrepared,
     Answer,
     QuizProps,
     QuizResult,
+    customStyles,
 } from "../../types";
 
 export const Quiz = ({
@@ -17,7 +18,7 @@ export const Quiz = ({
     resultsModal
 }: QuizProps) => {
 
-    const { height = "400px" } = customStyles;
+    const customization: customStyles = prepareStyles(customStyles);
 
     const [preparedQuestions, setPreparedQuestions] = React.useState<QuestionPrepared[]>([]);
     const [quizResult, setQuizResult] = React.useState<QuizResult | null>(null);
@@ -37,16 +38,28 @@ export const Quiz = ({
 
     return <div
         className={styles.app}
-        style={{ height: height || "30rem" }}
+        style={{
+            height: customization.height,
+            fontFamily: customization.fontFamily,
+            color: customization.textColor,
+            backgroundColor: customization.backgroundColor
+        }}
     >
         {resultsModal && quizResult && <ResultModal
             quizResult={quizResult}
             preparedQuestions={preparedQuestions}
             showModal={showResultModal}
             handleClose={() => setShowResultModal(false)}
+            customization={customization}
         />}
         {preparedQuestions.map((question: QuestionPrepared, index: number) => {
-            return <QuestionComponent key={question.id} question={question} answerFunc={answerFunc} index={index} />
+            return <QuestionComponent
+                key={question.id}
+                question={question}
+                answerFunc={answerFunc}
+                index={index}
+                customization={customization}
+            />
         })}
         <button
             onClick={() => prepareAnswers(

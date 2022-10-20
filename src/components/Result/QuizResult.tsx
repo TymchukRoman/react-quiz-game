@@ -4,7 +4,8 @@ import { QuestionComponent } from '../Question/QuestionComponent';
 
 export const QuizResultComponent = ({
     quizResult,
-    preparedQuestions
+    preparedQuestions,
+    customization
 }: QuizResultProps) => {
 
 
@@ -47,6 +48,7 @@ export const QuizResultComponent = ({
                     answers={quizResult?.answers.find((a: PreparedAnswer) => {
                         return a.id === q.id;
                     })}
+                    customization={customization}
                 />
             })}
         </div>

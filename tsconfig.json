@@ -35,6 +35,7 @@
     "node_modules",
     "dist",
     "example",
-    "src/test.data.ts"
+    "src/core/*.data.ts",
+    "src/core/*.test.tsx"
   ]
 }

@@ -6,7 +6,8 @@ import {
     Answer,
     PreparedAnswer,
     QuizResult,
-    AsyncQuestion
+    AsyncQuestion,
+    customStyles
 } from "../types";
 import { getScore } from './calculation';
 
@@ -114,4 +115,22 @@ export const prepareAnswersAsync = async (
     setQuizResult(QuizResult);
     setShowResultModal(true);
     answersCallback(QuizResult);
+}
+
+export const prepareStyles = (customStyles: customStyles) => {
+    const {
+        height = "400px",
+        backgroundColor = "white",
+        fontFamily = "Verdana, Arial, Helvetica, sans-serif",
+        textColor = "black",
+        disableNumbers = false,
+    } = customStyles;
+
+    return {
+        height,
+        backgroundColor,
+        fontFamily,
+        textColor,
+        disableNumbers
+    }
 }

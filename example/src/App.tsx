@@ -88,6 +88,7 @@ const App = () => {
         id: "-2",
         label: "-2"
       }],
+      cost: 10
     },
     {
       id: "2",
@@ -108,6 +109,7 @@ const App = () => {
         id: "-2",
         label: "-2"
       }],
+      cost: 10
     },
     {
       id: "3",
@@ -128,6 +130,7 @@ const App = () => {
         id: "-2",
         label: "-2"
       }],
+      cost: 10
     },
     {
       id: "4",
@@ -148,13 +151,16 @@ const App = () => {
         id: "-2",
         label: "-2"
       }],
+      cost: 15
     },
   ]}
     answersCallback={getResult}
     resultsModal={true}
     checkQuestion={checkAnswer}
     customStyles={{
-      height: "400px"
+      height: "400px",
+      // textColor: "red",
+      // disableNumbers: true
     }}
   />
 }

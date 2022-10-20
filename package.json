@@ -1,6 +1,6 @@
 {
   "name": "react-quiz-game",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "This package is under developing",
   "author": "Yaundee",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "test": "run-s test:unit test:build",
     "test:build": "run-s build",
     "test:lint": "eslint .",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:unit": "cross-env CI=1 react-scripts test -o --env=jsdom  --verbose",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && npm install && npm run build",
     "deploy": "gh-pages -d example/build"
