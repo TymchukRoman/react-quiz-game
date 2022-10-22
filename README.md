@@ -1,6 +1,6 @@
-# react-quiz-game (DEVELOPING)
+# react-quiz-game 
 
-> This package is under developing
+> Beta version
 
 [![NPM](https://img.shields.io/npm/v/react-quiz-game.svg)](https://www.npmjs.com/package/react-quiz-game) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -67,7 +67,7 @@ const questions = [
 ];
 
 const checkAnswer = async (aid, qid) => { //aid - answer id, qid = question id
-    return await fetchReslut(aid, qid);
+    return await fetchResult(aid, qid);
     // { 
     //   value: true || false, 
     //   correctValue: { id, label } (optional)

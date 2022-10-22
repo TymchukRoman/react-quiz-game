@@ -114,22 +114,32 @@ const App = () => {
     {
       id: "3",
       text: "2 + 4",
-      answers: [{
-        id: "6",
-        label: "6"
-      },
-      {
-        id: "2",
-        label: "2"
-      },
-      {
-        id: "1",
-        label: "1"
-      },
-      {
-        id: "-2",
-        label: "-2"
-      }],
+      answers: [
+        {
+          id: "6",
+          label: "6"
+        },
+        {
+          id: "5",
+          label: "5"
+        },
+        {
+          id: "-9",
+          label: "-9"
+        },
+        {
+          id: "2",
+          label: "2"
+        },
+        {
+          id: "1",
+          label: "1"
+        },
+        {
+          id: "-2",
+          label: "-2"
+        }
+      ],
       cost: 10
     },
     {
@@ -162,6 +172,7 @@ const App = () => {
       // textColor: "red",
       // disableNumbers: true
     }}
+    quizType={"consistent"}
   />
 }
 

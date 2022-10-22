@@ -15,7 +15,8 @@ export const Quiz = ({
     questions,
     customStyles = {},
     answersCallback,
-    resultsModal
+    resultsModal,
+    quizType
 }: QuizProps) => {
 
     const customization: customStyles = prepareStyles(customStyles);
@@ -23,6 +24,7 @@ export const Quiz = ({
     const [preparedQuestions, setPreparedQuestions] = React.useState<QuestionPrepared[]>([]);
     const [quizResult, setQuizResult] = React.useState<QuizResult | null>(null);
     const [showResultModal, setShowResultModal] = React.useState<boolean>(false);
+    const [selectedQuestion, setSelectedQuestion] = React.useState<number>(0);
 
     React.useEffect(() => {
         setPreparedQuestions(prepareQuestions(questions));
@@ -59,6 +61,9 @@ export const Quiz = ({
                 answerFunc={answerFunc}
                 index={index}
                 customization={customization}
+                quizType={quizType}
+                selectedQuestion={selectedQuestion}
+                setSelectedQuestion={setSelectedQuestion}
             />
         })}
         <button

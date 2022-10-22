@@ -10,13 +10,15 @@ import {
     AsyncQuestion,
     customStyles,
 } from "../../types";
+import { quizTypes } from '../../constants/quizTypes';
 
 export const AsyncQuiz = ({
     questions,
     customStyles = {},
     answersCallback,
     resultsModal,
-    checkQuestion
+    checkQuestion,
+    quizType
 }: AsyncQuizProps) => {
 
     const customization: customStyles = prepareStyles(customStyles);
@@ -24,6 +26,7 @@ export const AsyncQuiz = ({
     const [preparedQuestions, setPreparedQuestions] = React.useState<AsyncQuestion[]>([]);
     const [quizResult, setQuizResult] = React.useState<QuizResult | null>(null);
     const [showResultModal, setShowResultModal] = React.useState<boolean>(false);
+    const [selectedQuestion, setSelectedQuestion] = React.useState<number>(0);
 
     React.useEffect(() => {
         setPreparedQuestions(questions);
@@ -61,18 +64,23 @@ export const AsyncQuiz = ({
                 answerFunc={answerFunc}
                 index={index}
                 customization={customization}
+                quizType={quizType}
+                selectedQuestion={selectedQuestion}
+                setSelectedQuestion={setSelectedQuestion}
             />
         })}
-        <button
-            onClick={() => prepareAnswersAsync(
-                quizAnswers,
-                preparedQuestions,
-                answersCallback,
-                setQuizResult,
-                setShowResultModal,
-                checkQuestion
-            )}>
-            Submit
-        </button>
+        {((quizType === quizTypes.CONSISTENT && preparedQuestions.length <= selectedQuestion) || (quizType === quizTypes.INLINE || !quizType))
+            && <button
+                onClick={() => prepareAnswersAsync(
+                    quizAnswers,
+                    preparedQuestions,
+                    answersCallback,
+                    setQuizResult,
+                    setShowResultModal,
+                    checkQuestion
+                )}>
+                Submit
+            </button>
+        }
     </div>
 }

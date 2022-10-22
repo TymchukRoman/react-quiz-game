@@ -11,7 +11,8 @@ import {
 interface MainQuizProps {
     resultsModal?: boolean;
     answersCallback: AnswersCallbackFunction;
-    customStyles?: customStyles
+    customStyles?: customStyles;
+    quizType?: string;
 }
 
 export interface QuizProps extends MainQuizProps {
@@ -36,6 +37,9 @@ export interface QuestionProps {
     highlightAnswers?: boolean;
     answers?: PreparedAnswer;
     customization: customStyles;
+    quizType?: string | undefined;
+    selectedQuestion?: number;
+    setSelectedQuestion?: any;
 }
 
 export interface QuizResultProps {
